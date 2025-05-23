@@ -195,7 +195,7 @@
       margin-bottom: 50px;
       position: relative;
       bottom: 470px;
-      padding: 25px; /* IMPORTANTE! */
+      padding: 25px; 
       line-height: 1.4
     }
     #info-esquerda-hub1{
