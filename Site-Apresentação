@@ -1,69 +1,93 @@
 <head>
   <title>AmBrasil</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
   <style>
+
     body {
       margin: 0;
       padding: 0;
       font-family: Arial, Helvetica, sans-serif;
-      background: linear-gradient(to bottom, #0e0e0e 50%, #00ff88 100%);;
+      background: linear-gradient(to bottom, #0e0e0e 50%, #00ff88 100%);
+    }
+
+    section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+ 
+    header {
+      display: flex;
+      justify-content: space-between;
+      background: #00ff84;
+      color: #1E1E1E;
+      width: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      box-sizing: border-box;
+      margin: 0;
+      border-radius: 10px 10px 25px 25px;
+      border: solid 1px #1E1E1E;
     }
 
     .top-bar {
       display: flex;
+      justify-content: space-between;
       align-items: center;
       padding: 0 20px;
+      width: 100%;
+    }
+    .top-bar-direita, .top-bar-esquerda {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
     .top-bar a {
       color: #1E1E1E;
       margin-left: 20px;
       text-decoration: none;
-      font-size: 25px;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 1,2rem;
       font-weight: bold;
       display: flex;
       align-items: center;
       transition: transform 0.3s ease-in-out;
     }
+
     .top-bar a:hover {
-  transform: scale(1.1);
-}
-
-    #id-ajuda {
-      margin-left: 5px;
+      transform: scale(1.1);
     }
-
-.topbar-search:focus {
-  box-shadow: 0 0 5px #00ff84;
-}
 
     .linha-vertical {
       width: 1px;
       height: 90px;
       background-color: #1E1E1E;
-      margin: 10px 10px;
+      margin: 10px;
     }
 
-    #id-login {
-      margin-left: 1800px;
-      width: 150px;
-      height: 100ox;
+    #id-ajuda { margin-left: 5px; }
+
+    #id-criesuaconta, #id-login{
+      width: 100px;
+      height: 70px;
       border-style: solid;
-      border-radius: 15px;
       border-width: 1px;
-      align-items: center;
+      border-radius: 15px;
       text-align: center;
+    }
+    .container-conheça-hub{
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     #id-hub {
-      margin-left: 1450px;
-      margin-right: auto;
-      font-size: 35px;
+      font-size: 27px;
       color: #00ff84;
-      width: 530px;
+      width: 300px;
       height: 100px;
       background-color: #1E1E1E;
       border-radius: 15px;
@@ -71,14 +95,20 @@
       align-items: center;
       justify-content: center;
     }
+       .slide-tudo{
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
 
     .slide-hub {
-      display: block;
-      height: 500px;
-      width: 600px;
-      margin-top: 20px;
-      position: relative;
-      margin-left: 1200px;
+     display: flex;
+     justify-content: center;
+     position: relative;
+     height: 800px;
+     width: 900px;
+     margin-left: 60px;
+     margin-top: 25px;
     }
 
     .slide-hub li {
@@ -87,22 +117,21 @@
     }
 
     .slide-hub img {
-      margin: auto;
-      height: 100%;
-      width: 1000px;
-      vertical-align: top;
+      height: 600px;
+      width: 700px;
+      display: flex;
+      justify-content: center;
       border-radius: 15px;
-      border-color: #000;
-      border-width: 1px;
       opacity: 0;
       visibility: hidden;
-      transition: opacity 0.6s ease-in-out, visibility 0.6s ease-in-out;
+      transition: all 0.6s ease-in-out;
       transform: scale(1);
     }
+
     .slide-hub img:hover {
-  transform: scale(1.03); /* Zoom leve */
-  cursor: pointer;
-}
+      transform: scale(1.03);
+      cursor: pointer;
+    }
 
     .slide-hub input {
       display: none;
@@ -114,18 +143,16 @@
       display: block;
       height: 20px;
       width: 10px;
-      z-index: 10;
       border-radius: 5px;
-      border-color: #000;
-      border-width: 0.5px;
       position: relative;
       right: 35px;
-      transition: all 0.3s ease-in-out
+      transition: all 0.3s ease-in-out;
     }
+
     .slide-hub label:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 4px 10px rgba(0, 255, 132, 0.5);
-}
+      transform: translateY(-4px);
+      box-shadow: 0 4px 10px rgba(0, 255, 132, 0.5);
+    }
 
     .slide-hub li:nth-child(1) label { top: 340px; }
     .slide-hub li:nth-child(2) label { top: 370px; }
@@ -139,34 +166,40 @@
       transform: scale(1.05) translateX(5px);
       filter: brightness(1.1);
       box-shadow: 0 8px 20px rgba(0, 255, 132, 0.3);
-      cursor: pointer;
-      transition: all 0.3s ease-in-out;
+    }
+    .container-info{
+      display: flex;
+      justify-content: center;
+      position: relative;
+      gap: 20px;
+      flex-direction: column;
+      margin-right: 25px;
+      margin-bottom: 100px;
     }
 
-    .info-abaixo-hub {
-      font-family: Arial, Helvetica, sans-serif;
-      position: relative;
-      left: 600px;
-      top: 250px;
-    }
+      .container-esquerda-aesthetics
+      {
+      font-style: bold;
+      font-size: 20px;
+      color: white;
+      width: 300px;
+      height: 200px;
+      background-color: #1E1E1E;
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 15px;
+      line-height: 1.4;
+      border-style: solid;
+      border-width: 1px;  
+      border-color:#006633; 
+      }
+
 
     #titulo, #titulo2 {
       color: #00ff84;
       font-size: 30px;
-    }
-    #titulo {
-      position: relative;
-      bottom: 475px;
-    }
-    #subtitulo{
-      position: relative;
-      bottom: 460px;
-    }
-
-    #titulo2 {
-      position: relative;
-      left: 650px;
-      bottom: 600px;
     }
 
     #subtitulo, #subtitulo2 {
@@ -174,65 +207,42 @@
       font-size: 19px;
     }
 
-    #subtitulo2 {
-      position: relative;
-      left: 650px;
-      bottom: 585px;
-    }
-    .info-esquerda-hub{
-      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-      font-size: 25px;
-      color: #00ff84;
-      width: 400px;
-      height: 150px;
-      background-color: #1E1E1E;
-      border-radius: 15px;
-      border-width: 1px;
-      margin-left: 100px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 50px;
-      position: relative;
-      bottom: 470px;
-      padding: 25px; 
-      line-height: 1.4
-    }
-    #info-esquerda-hub1{
-      position: relative;
-      left: 550px;
-      bottom: 970px;
-    }
     .linha-vertical2 {
       width: 1px;
-      background-color: #00ff84;
-      display: flex;
-      position: relative;
       height: 300px;
-      left: 600px;
-      bottom: 760px;
-    }
+      background-color: #00ff84;
+      position: relative;
+      }
 
     .Conheça {
       font-size: 40px;
       color: white;
       text-align: center;
+      justify-content: center;
       position: relative;
-      bottom: 1000px;
+      display: flex;
+      margin-top: 15px;
     }
 
-    .link-plano {
-      text-decoration: none;
+  
+    .info-abaixo-hub {
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+      justify-content: center;
+      position: relative;
+      gap: 30px;
+      margin-bottom: 60px;
     }
 
     .planos-container {
       display: flex;
       justify-content: center;
+      flex-direction: row;
       align-items: center;
-      gap: 20px;
-      margin-top: 20px;
       position: relative;
-      bottom: 600px;
+      gap: 50px;
+      margin-bottom: 35px;
     }
 
     .plano-individual, .plano-conjunto {
@@ -240,34 +250,24 @@
       height: 400px;
       width: 400px;
       border-radius: 10px;
-      position: relative;
-      border: 1px solid #000;
       perspective: 1000px;
     }
 
     .plano-individual-transicao, .plano-conjunto-transicao {
-      position: relative;
       width: 100%;
       height: 100%;
       transition: transform 0.6s;
       transform-style: preserve-3d;
     }
 
-    .plano-individual:hover .plano-individual-transicao {
-      transform: rotateY(180deg);
-    }
-
+    .plano-individual:hover .plano-individual-transicao,
     .plano-conjunto:hover .plano-conjunto-transicao {
       transform: rotateY(180deg);
     }
 
-    .plano-individual-frente,
-    .plano-individual-tras,
-    .plano-conjunto-frente,
-    .plano-conjunto-tras {
+    .plano-individual-frente, .plano-individual-tras,
+    .plano-conjunto-frente, .plano-conjunto-tras {
       position: absolute;
-      top: 0;
-      left: 0;
       width: 100%;
       height: 100%;
       backface-visibility: hidden;
@@ -280,7 +280,6 @@
       justify-content: center;
       background-color: #006633;
       color: white;
-      box-sizing: border-box;
       padding: 10px;
     }
 
@@ -289,25 +288,16 @@
       transform: rotateY(180deg);
     }
 
-    .plano-individual-tras h1,
-    .plano-conjunto-tras h1 {
-      margin-bottom: 20px;
-      text-align: center;
-      font-size: 55px;
-      color: #FFC943;
-    }
-
-    .plano-individual-tras p,
-    .plano-conjunto-tras p {
-      font-size: 45px;
+    .plano-individual-tras h1, .plano-conjunto-tras h1,
+    .plano-individual-tras p, .plano-conjunto-tras p {
       color: #FFC943;
       text-align: center;
+      font-size: 40px;
     }
 
     .texto-container {
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
       gap: 10px;
       text-align: center;
@@ -328,76 +318,84 @@
       font-size: 25px;
       color: white;
     }
-    .tudo-planos{
-      transform: translateY(-300px);
+
+    .link-plano {
+      text-decoration: none;
     }
   </style>
 
   <header style="background: #00ff84; color: #1E1E1E; width: 100%; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; box-sizing: border-box; margin: 0; border-radius: 10px 10px 25px 25px; border: solid 1px #1E1E1E;">
     <div class="top-bar">
-      <a href="">AmBrasil</a>
-      <div class="linha-vertical"></div>
-      <a href="" id="id-ajuda">Ajuda</a>
-      <a href="http://127.0.0.1:5500/LoginGerenciador.HTML" id="id-login">Faça Seu Login</a>
-      <div class="linha-vertical"></div>
-      <a href="http://127.0.0.1:5500/CriarConta.HTML" id="id-criesuaconta">Crie Sua Conta</a>
+      <div class="top-bar-esquerda">
+        <a href="">AmBrasil</a>
+         <div class="linha-vertical"></div>
+        <a href="" id="id-ajuda">Ajuda</a>
+       </div>
+       <div class="top-bar-direita">
+        <a href="http://127.0.0.1:5500/LoginGerenciador.HTML" id="id-login">Faça Seu Login</a>
+        <a href="http://127.0.0.1:5500/CriarConta.HTML" id="id-criesuaconta">Crie Sua Conta</a>
+       </div>
     </div>
   </header>
 
   <main>
-    <section>
-      <h2 id="id-hub">Conheça nosso HUB</h2>
+
+      <div class="container-conheça-hub">
+       <h2 id="id-hub">Conheça nosso HUB</h2>
+      </div>
+    <div class="slide-tudo">
       <ul class="slide-hub">
         <li>
           <input type="radio" id="slide1" name="slide" checked>
           <label for="slide1"></label>
-          <img src="ArbimakerBrasilFotos/Gerenciador2.png">
+          <img src="ArbimakerBrasilFotos/Gerenciador.preto.png">
         </li>
         <li>
           <input type="radio" id="slide2" name="slide">
           <label for="slide2"></label>
-          <img src="ArbimakerBrasilFotos/VerApostas2.png">
+          <img src="ArbimakerBrasilFotos/Verapostas.preto.png">
         </li>
         <li>
           <input type="radio" id="slide3" name="slide">
           <label for="slide3"></label>
-          <img src="ArbimakerBrasilFotos/CasasApostas.png">
+          <img src="ArbimakerBrasilFotos/Vercasas.preto.png">
         </li>
         <li>
           <input type="radio" id="slide4" name="slide">
           <label for="slide4"></label>
-          <img src="ArbimakerBrasilFotos/Metas.png">
+          <img src="ArbimakerBrasilFotos/Metas.preto.png">
         </li>
       </ul>
-    </section>
-    <div class="info-esquerda-hub">
-        Um dashboard com informações completas da sua operação,  com organizações gráficas e personalizadas especificamente para arbitragem
+      <div class="container-info">
+        <div class="container-esquerda-aesthetics">Anote todas as suas obersarvações, uma Área específica para escrever o que você quiser para lembrar e se organizar.</div>
+        <div class="container-esquerda-aesthetics">Área de ajuda entre a comunidade, um fórum para compartilhar conhecimento e dicas do que está acontecendo no cenário da arbitragem</div>
+       </div>
+      <div class="container-info">
+       <div class="container-esquerda-aesthetics">Um dashboard com informações completas da sua operação,  com organizações gráficas e personalizadas especificamente para arbitragem</div>
+       <div class="container-esquerda-aesthetics">Calculos automáticos de lucros semanais, mensais e anuais. Porcentagem dos seus lucros e análise de desempenho de forma rápida.</div>
+      </div>
     </div>
-    <div class="info-esquerda-hub">
-      Calculos automáticos de lucros semanais, mensais e anuais. Porcentagem dos seus lucros e análise de desempenho de forma rápida.
-    </div>
-    <div class="info-esquerda-hub" id="info-esquerda-hub1">
-      Anote todas as suas obersarvações, uma Área específica para escrever o que você quiser para lembrar e se organizar.
-    </div>
-    <div class="info-esquerda-hub" id="info-esquerda-hub1">
-      Área de ajuda entre a comunidade, um fórum para compartilhar conhecimento e dicas do que está acontecendo no cenário da arbitragem
-    </div>
-   <div class="tudo-planos">
-  <div class="info-abaixo-hub">
-    <h1 id="titulo">Controle total das suas apostas!</h1>
-    <h2 id="subtitulo">
-      Gerencie suas entradas, trace metas semanais e mensais! <br>
-      Agilize sua operação, e tenha controle total das suas apostas!
-    </h2>
-    <h1 id="titulo2">Gerencie seu Escritório!</h1>
-    <h2 id="subtitulo2">
-      Controle total dos seus operadores, tenha um ambiente <br>
-      controlado e organizado, com interações em tempo real. <br>
-      Trace metas e maximize seus lucros!
-    </h2>
-    <div class="linha-vertical2"></div>
-  </div>
 
+
+     <div class="info-abaixo-hub">
+      <div class="controle1">
+       <h1 id="titulo">Controle total das suas apostas!</h1>
+       <h2 id="subtitulo">
+        Gerencie suas entradas, trace metas semanais e mensais! <br>
+        Agilize sua operação, e tenha controle total das suas apostas!
+       </h2>
+      </div>
+        <div class="linha-vertical2"></div>
+      <div class="controle2">
+       <h1 id="titulo2">Gerencie seu Escritório!</h1>
+       <h2 id="subtitulo2">
+        Controle total dos seus operadores, tenha um ambiente <br>
+        controlado e organizado, com interações em tempo real. <br>
+        Trace metas e maximize seus lucros!
+        </h2>
+       </div>
+     </div>
+ 
   <div>
     <h3 class="Conheça">Conheça nossos Planos</h3>
   </div>
