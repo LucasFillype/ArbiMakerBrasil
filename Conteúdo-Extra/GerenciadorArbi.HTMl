@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Gerenciador de Apostas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --text-color: white;
+      --shadow-color: rgba(0, 102, 51, 0.5);
+      --btn-color: #006633;
+      --btn-hover-color: #45a049;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #1E1E1E;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: white;
+    }
+    .menu, .section {
+      margin: 20px auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 8px;
+      max-width: 600px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .menu button {
+      position: relative;
+      width: 100%;
+      padding: 12px 20px;
+      margin: 5px 0;
+      font-size: 18px;
+      font-weight: bold;
+      background-color: var(--btn-color);
+      color: var(--text-color);
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      overflow: hidden;
+      box-shadow: var(--shadow-color) 2px 2px 10px;
+      transition: background-color 0.3s ease;
+    }
+    .menu button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: var(--btn-hover-color);
+      transition: left 0.4s ease;
+      z-index: 0;
+    }
+    .menu button:hover::before {
+      left: 0;
+    }
+    .menu button span {
+      position: relative;
+      z-index: 1;
+    }
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin: 5px 0 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    #apostas-lista {
+      margin-top: 20px;
+    }
+    .btn-remover-small {
+      background-color: red;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-size: 12px;
+      cursor: pointer;
+      margin-left: 10px;
+      transition: background-color 0.3s;
+    }
+    .btn-remover-small:hover {
+      background-color: darkred;
+    }
+    .botao-verde {
+    position: relative;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 5px 0;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: var(--btn-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    overflow: hidden;
+    box-shadow: var(--shadow-color) 2px 2px 10px;
+    transition: background-color 0.3s ease;
+}
+
+.botao-verde::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--btn-hover-color);
+    transition: left 0.4s ease;
+    z-index: 0;
+}
+
+.botao-verde:hover::before {
+    left: 0;
+}
+
+.botao-verde span {
+    position: relative;
+    z-index: 1;
+}
+#RNA {
+  color:white;
+}
+  </style>
+</head>
+<body>
+  <h1>Gerenciador de Apostas</h1>
+
+  <div class="menu">
+    <button onclick="mostrar('registrar')"><span>Registrar Nova Aposta</span></button>
+    <button onclick="mostrar('ver')"><span>Ver Todas as Apostas</span></button>
+    <button onclick="mostrar('casas')"><span>Ver Casas de Apostas</span></button>
+    <button onclick="mostrar('metas')"><span>Metas</span></button>
+    <button onclick="sair()"><span>Sair</span></button>
+  </div>
+
+  <div id="registrar" class="section" style="display:none;">
+    <h2 id="RNA">Registrar Nova Aposta</h2>
+    <input type="number" id="numero" placeholder="Número da aposta">
+    <select id="data"></select>
+    <input type="text" id="hora" placeholder="Horário do jogo">
+    <select id="casa1"></select>
+    <select id="casa2"></select>
+    <input type="number" id="stake1" placeholder="Stake 1">
+    <input type="number" id="stake2" placeholder="Stake 2">
+    <input type="number" step="0.01" id="odd1" placeholder="Odd 1">
+    <input type="number" step="0.01" id="odd2" placeholder="Odd 2">
+    <button class="botao-verde" onclick="registrarAposta()"><span>Registrar</span></button>
+  </div>
+
+  <div id="ver" class="section" style="display:none;">
+    <h2>Todas as Apostas</h2>
+    <select id="filtro-data" onchange="atualizarApostas()"></select>
+    <div id="apostas-lista"></div>
+  </div>
+
+  <div id="casas" class="section" style="display:none;">
+    <h2>Casas de Apostas</h2>
+    <div id="casas-lista"></div>
+    <button class="botao-verde" onclick="somarBancas()"><span>Somar Bancas</span></button>
+<p id="total-bancas" style="margin-top: 10px; font-weight: bold;"></p>
+  
+    <h3>Adicionar Nova Casa</h3>
+    <input type="text" id="nova-casa-nome" placeholder="Nome da nova casa">
+    <input type="text" id="nova-casa-valor" placeholder="Valor inicial (ex: R$1000)">
+    <button class="botao-verde" onclick="adicionarNovaCasa()"><span>Adicionar</span></button>
+  </div>
+
+  <div id="metas" class="section" style="display:none;">
+    <h2>Metas</h2>
+    <p id="meta-semanal">Meta Semanal: R$900</p>
+    <p id="Diferenca-Meta_semanal">Falta R$X para Atingir sua meta!</p>
+    <input type="number" id="input-meta-semanal" oninput="atualizarMetaSemanal()" placeholder="Nova meta semanal">
+    <p id="meta-mensal">Meta Mensal: R$3600</p>
+    <input type="number" id="input-meta-mensal" oninput="atualizarMetaMensal()" placeholder="Nova meta mensal">
+  </div>
+
+  <script>
+    let casasApostas = ["Pinnacle", "NoviBet", "McGames", "BetVip", "Betano", "Stake", "Rivalo", "Bet7k", "Blaze"];
+    let valorCasas = ["R$5000", "R$2000", "R$3500", "R$1000", "R$0", "R$0"];
+    let apostasDia = {};
+    let metaSemanal = 900;
+    let metaMensal = 3600;
+    let LucroTotal = 0;
+
+    function mostrar(id) {
+      document.querySelectorAll('.section').forEach(sec => sec.style.display = 'none');
+      document.getElementById(id).style.display = 'block';
+      if (id === 'casas') atualizarCasas();
+      if (id === 'ver') atualizarApostas();
+    }
+
+    function registrarAposta() {
+      const numero = document.getElementById('numero').value;
+      const data = document.getElementById('data').value;
+      const hora = document.getElementById('hora').value;
+      const stake1 = parseFloat(document.getElementById('stake1').value);
+      const stake2 = parseFloat(document.getElementById('stake2').value);
+      const odd1 = parseFloat(document.getElementById('odd1').value);
+      const odd2 = parseFloat(document.getElementById('odd2').value);
+
+      if (!numero || !data || !hora || isNaN(stake1) || isNaN(stake2) || isNaN(odd1) || isNaN(odd2)) {
+        alert("Preencha todos os campos corretamente.");
+        return;
+      }
+
+      const aposta = {
+        numero: parseInt(numero),
+        data,
+        hora,
+        casa1: casasApostas[document.getElementById('casa1').selectedIndex],
+        casa2: casasApostas[document.getElementById('casa2').selectedIndex],
+        stake1,
+        stake2,
+        odd1,
+        odd2,
+        lucro: (stake1 * odd1) - stake1 - stake2
+      };
+      aposta.lucroPorcentagem = (aposta.lucro / (stake1 + stake2)) * 100;
+
+      if (!apostasDia[data]) apostasDia[data] = [];
+      apostasDia[data].push(aposta);
+      salvarNoLocalStorage();
+      atualizarFiltroDatas();
+      alert(`Lucro: R$${aposta.lucro.toFixed(2)} | ${aposta.lucroPorcentagem.toFixed(2)}%`);
+    }
+
+ function salvarNoLocalStorage() {
+      localStorage.setItem("apostasDia", JSON.stringify(apostasDia));
+    }
+
+    function carregarDoLocalStorage() {
+      const dados = localStorage.getItem("apostasDia");
+      if (dados) {
+        apostasDia = JSON.parse(dados);
+      }
+    }
+
+    function atualizarFiltroDatas() {
+      const filtro = document.getElementById('filtro-data');
+      filtro.innerHTML = '';
+      Object.keys(apostasDia).forEach(data => {
+        const opt = document.createElement('option');
+        opt.value = data;
+        opt.textContent = data;
+        filtro.appendChild(opt);
+      });
+    }
+    function salvarValorCasa(indice) {
+  const novoValor = document.getElementById(`valor-casa-${indice}`).value;
+  if (!novoValor) {
+    alert("Digite um valor válido.");
+    return;
+  }
+  valorCasas[indice] = novoValor;
+  atualizarCasas();
+}
+
+
+    function atualizarApostas() {
+      const dataSelecionada = document.getElementById('filtro-data').value;
+      const lista = document.getElementById('apostas-lista');
+      lista.innerHTML = '';
+
+      if (!apostasDia[dataSelecionada]) return;
+
+      apostasDia[dataSelecionada].forEach((aposta, index) => {
+        const div = document.createElement('div');
+        div.innerHTML = `
+          <p><strong>Jogo ${aposta.numero}</strong> - ${aposta.hora}</p>
+          <p>${aposta.casa1} x ${aposta.casa2}</p>
+          <p>Stake1: R$${aposta.stake1} | Odd1: ${aposta.odd1}</p>
+          <p>Stake2: R$${aposta.stake2} | Odd2: ${aposta.odd2}</p>
+          <p>Lucro: R$${aposta.lucro.toFixed(2)} (${aposta.lucroPorcentagem.toFixed(2)}%)</p>
+          <button class="btn-remover-small" onclick="removerAposta('${dataSelecionada}', ${index})">Remover</button>
+          <hr>`;
+        lista.appendChild(div);
+      });
+    }
+
+    function removerAposta(data, index) {
+      apostasDia[data].splice(index, 1);
+      if (apostasDia[data].length === 0) delete apostasDia[data];
+      salvarNoLocalStorage();
+      atualizarFiltroDatas();
+      atualizarApostas();
+    }
+    function adicionarNovaCasa() {
+  const nome = document.getElementById("nova-casa-nome").value.trim();
+  const valor = document.getElementById("nova-casa-valor").value.trim();
+  if (!nome || !valor) {
+    alert("Preencha o nome e o valor da nova casa.");
+    return;
+  }
+  casasApostas.push(nome);
+  valorCasas.push(valor);
+  document.getElementById("nova-casa-nome").value = '';
+  document.getElementById("nova-casa-valor").value = '';
+  atualizarCasas();
+  preencherSelects(); // Atualiza os selects das apostas também
+}
+
+    function atualizarCasas() {
+  const lista = document.getElementById('casas-lista');
+  lista.innerHTML = '';
+  casasApostas.forEach((casa, i) => {
+    lista.innerHTML += `
+      <div style="margin-bottom:10px;">
+        <strong>${casa}:</strong>
+        <input type="text" id="valor-casa-${i}" value="${valorCasas[i]}" style="width: 120px; margin-left: 10px;">
+        <button class="botao-verde" style="width:auto; padding:6px 12px;" onclick="salvarValorCasa(${i})"><span>Salvar</span></button>
+      </div>
+    `;
+  });
+  function salvarValorCasa(indice) {
+  const novoValor = document.getElementById(`valor-casa-${indice}`).value;
+  if (!novoValor) {
+    alert("Digite um valor válido.");
+    return;
+  }
+  valorCasas[indice] = novoValor;
+  salvarCasasNoLocalStorage(); // salva os novos valores
+  atualizarCasas();
+}}
+function salvarCasasNoLocalStorage() {
+  localStorage.setItem("casasApostas", JSON.stringify(casasApostas));
+  localStorage.setItem("valorCasas", JSON.stringify(valorCasas));
+}
+
+function carregarCasasDoLocalStorage() {
+  const casasSalvas = localStorage.getItem("casasApostas");
+  const valoresSalvos = localStorage.getItem("valorCasas");
+  if (casasSalvas && valoresSalvos) {
+    casasApostas = JSON.parse(casasSalvas);
+    valorCasas = JSON.parse(valoresSalvos);
+  }
+}
+
+    function alterarValorCasa() {
+      const nome = prompt("Digite o nome da casa que deseja alterar:");
+      const indice = casasApostas.indexOf(nome);
+      if (indice === -1) {
+        alert("Casa não encontrada.");
+        return;
+      }
+      const novoValor = prompt("Digite o novo valor (ex: R$2000):");
+      valorCasas[indice] = novoValor;
+      atualizarCasas();
+    }
+
+    function atualizarMetaSemanal() {
+      const novaMeta = parseFloat(document.getElementById("input-meta-semanal").value);
+      if (!isNaN(novaMeta)) {
+        metaSemanal = novaMeta;
+        document.getElementById("meta-semanal").textContent = `Meta Semanal: R$${metaSemanal}`;
+      }
+    }
+
+    function atualizarMetaMensal() {
+      const novaMeta = parseFloat(document.getElementById("input-meta-mensal").value);
+      if (!isNaN(novaMeta)) {
+        metaMensal = novaMeta;
+        document.getElementById("meta-mensal").textContent = `Meta Mensal: R$${metaMensal}`;
+      }
+    }
+
+    function sair() {
+      if (confirm("Deseja realmente sair?")) {
+        location.reload();
+      }
+    }
+
+    function preencherSelects() {
+      const selects = [document.getElementById("casa1"), document.getElementById("casa2")];
+      selects.forEach(select => {
+        select.innerHTML = '';
+        casasApostas.forEach(casa => {
+          const opt = document.createElement("option");
+          opt.textContent = casa;
+          select.appendChild(opt);
+        });
+      });
+
+      const selectData = document.getElementById("data");
+      const hoje = new Date();
+      for (let i = 0; i < 7; i++) {
+        const d = new Date(hoje);
+        d.setDate(hoje.getDate() + i);
+        const dia = d.toISOString().split('T')[0];
+        const opt = document.createElement("option");
+        opt.value = dia;
+        opt.textContent = dia;
+        selectData.appendChild(opt);
+      }
+    }
+
+    function somarBancas() {
+  let total = 0;
+  valorCasas.forEach(valor => {
+    const numero = parseFloat(valor.replace("R$", "").replace(",", ".").trim());
+    if (!isNaN(numero)) {
+      total += numero;
+    }
+  });
+  document.getElementById("total-bancas").textContent = `Total das Bancas: R$${total.toFixed(2)}`;
+}
+
+    // Inicialização
+    carregarDoLocalStorage();
+    carregarCasasDoLocalStorage();
+    preencherSelects();
+    atualizarFiltroDatas();
+  </script>
+</body>
+</html>
