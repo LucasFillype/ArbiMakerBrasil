@@ -171,7 +171,7 @@ header {
 }
 
 .Conheça {
-  font-size: 40px;
+  font-size: 30px;
   color: white;
   text-align: center;
   justify-content: center;
@@ -305,4 +305,25 @@ header {
     display: flex;
     flex-direction: column;
   }
+  
+.info-abaixo-hub {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+.linha-vertical2{
+  display: none;
+}
+
+.controle1{
+  border: 1px solid #1b1e23;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.controle2{
+  border: 1px solid #1b1e23;
+  padding: 15px;
+  border-radius: 10px;
+}
 }
