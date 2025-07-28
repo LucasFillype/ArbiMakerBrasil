@@ -1,92 +1,203 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Crie Sua Conta - ArbimakerBrasil</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login Page</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #0e0e0e;
-      color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+    * {
+      box-sizing: border-box;
       margin: 0;
-      background: linear-gradient(to bottom, #0e0e0e 50%, #00ff88 100%);
-    }
-    .logo{
-      border-radius: 50%;
+      padding: 0;
     }
 
-    .login-container {
-      background-color: #1f1f1f;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px #00ff88;
-      width: 500px;
-      height: 600px;
-      text-align: center;
+    body, html {
+      height: 100%;
+      font-family: Arial, sans-serif;
     }
 
-    input {
-    background-color: #2c2c2c;
-    color: white;
-    width: 100%;
-    padding: 10px;
-    border: none;           
-    outline: none;          
-    border-radius: 25px;
-    font-size: 16px;
-    margin-top: 20px;
-    margin-right: 30px;
-    transition: box-shadow 0.3s ease;  
-   }
-
-   input:focus {
-    box-shadow: 0 0 8px #00ff84; 
+    .container {
+      display: flex;
+      height: 100vh;
     }
 
-    button {
-      background-color: #00ff88;
-      color: #000;
-      padding: 10px 15px;
+    .left {
+      flex: 2;
+      background: linear-gradient(135deg, #1d6e20, #00ff84);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #logo {
+      width: 250px;         
+      border-radius: 50%;   
+      object-fit: cover;    
+     }
+
+    .right {
+      flex: 1;
+      background-color: #18181b;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .login-box {
+      width: 80%;
+      max-width: 320px;
+    }
+
+    .login-box h2 {
+      margin-bottom: 20px;
+    }
+
+    .social-button {
+      background-color: #27272a;
+      color: white;
+      border: none;
+      padding: 10px;
+      margin-bottom: 10px;
+      width: 100%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .social-button img {
+      width: 20px;
+      height: 20px;
+    }
+
+    .input-group {
+      margin-bottom: 15px;
+    }
+
+    .input-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 14px;
+    }
+
+    .input-group label:focus{
+      border: 2px solid #00ff84;
+      outline: none;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 10px;
+      background-color: #27272a;
+      border: none;
+      color: white;
+      border-radius: 4px;
+    }
+
+    .forgot {
+      display: block;
+      text-align: right;
+      font-size: 12px;
+      margin-top: 5px;
+      color: #00ff84;
+      text-decoration: none;
+    }
+
+    .forgot:hover {
+      text-decoration: underline;
+    }
+
+    .login-button {
+      width: 100%;
+      background-color: #00ff84;
+      color: black;
+      padding: 10px;
       font-weight: bold;
       border: none;
-      border-radius: 5px;
+      margin-top: 15px;
+      margin-bottom: 15px;
       cursor: pointer;
-      width: 250px;
-      margin-top: 20px;
     }
 
-    button:hover {
-      background-color: #00cc6a;
+    .login-button:hover {
+      background-color: #00ff84;
+    }
+
+    .signup {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 13px;
+      color: #a1a1aa;
+    }
+
+    .signup a {
+      color: #a78bfa;
+      text-decoration: none;
+    }
+
+    .signup a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px){
+      .left{
+        display: none;
+
+      }
+      #logo{
+        display: none;
+      }
+
+      .right{
+        background: linear-gradient(135deg, #18181b, #00ff84);
+      }
     }
   </style>
 </head>
 <body>
-  <div class="login-container">
-    <h2>Crie sua Conta - ArbimakerBrasil</h2>
-    <img src="/ArbimakerBrasilFotos/ArbiMakerLogo.png" height="150px" width="150px" class="logo">
-     <input type="text" id="usuario" placeholder="E-mail" />
-     <input type="password" id="senha" placeholder=" Crie Sua Senha" />
-     <input type="password" id="senha" placeholder="Confirme Sua Senha" />
-     <input type="number" id="numero" placeholder="Telefone" />
-    <button onclick="logar()">Criar Conta</button>
-    <button class="button">Entrar com o Google</button>
+
+  <div class="container">
+    <!-- Esquerda -->
+    <div class="left">
+      <img src="/ArbimakerBrasilFotos/ArbiMakerLogo.png" alt="" id="logo">
+    </div>
+
+    <!-- Direita -->
+    <div class="right">
+      <div class="login-box">
+        <h2>Crie sua conta</h2>
+        <div class="input-group">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" placeholder="Seu e-mail">
+        </div>
+
+        <div class="input-group">
+          <label for="password">Crie sua Senha</label>
+          <input type="password" id="password" placeholder="Sua senha">
+        </div>
+
+        <div class="input-group">
+          <label for="email">Digite seu CPF</label>
+          <input type="email" id="cpf" placeholder="Seu CPF">
+        </div>
+
+        <div class="input-group">
+          <label for="email">Digite seu Celular</label>
+          <input type="email" id="cpf" placeholder="DDD...">
+        </div>
+
+        <button class="login-button">Criar</button>
+
+        <button class="social-button">
+          <img src="https://cdn-icons-png.flaticon.com/512/281/281764.png" alt="Google">
+          Google
+        </button>
+
+      </div>
+    </div>
   </div>
 
-  <script>
-    function logar() {
-      const usuario = document.getElementById("usuario").value;
-      const senha = document.getElementById("senha").value;
-
-      if (usuario === "admin" && senha === "1234") {
-        window.location.href = "apresentacao.html";
-      } else {
-        alert("Usuário ou senha incorretos!");
-      }
-    }
-  </script>
 </body>
 </html>
