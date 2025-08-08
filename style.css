@@ -3,6 +3,13 @@
   padding: 0;
   font-family: Arial, Helvetica, sans-serif;
   background: linear-gradient(to bottom, #0e0e0e 50%, #00ff88 100%);
+
+  font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
 }
 
 section {
@@ -81,6 +88,26 @@ header {
   align-items: center;
 }
 
+.superior {
+  display: flex;
+  justify-content: space-around;
+  align-items: center; /* Garante alinhamento vertical */
+  color: whitesmoke;
+  padding: 40px 20px;  /* Espaço interno opcional */
+}
+
+.superior-texto {
+  display: flex;
+  flex-direction: column;
+  gap: 5px; /* Espaçamento entre h1 e p */
+  max-width: 500px; /* Para evitar que o texto estique demais */
+}
+
+.superior img{
+  width: 200px;
+  border-radius: 50%;
+}
+
 #id-hub {
   font-size: 27px;
   color: #00ff84;
@@ -100,12 +127,17 @@ header {
   max-width: 500px;
 }
 
-.primeira-linha,
-.segunda-linha {
+.primeira-linha{
   display: flex;
-  flex-direction: row;
   justify-content: space-around;
   margin-bottom: 100px;
+  gap: 20px;
+}
+
+.primeira-linha-esquerda{
+  display: flex;
+  flex-direction: column;
+
   gap: 20px;
 }
 
@@ -114,21 +146,25 @@ header {
 #terceira-foto {
   border: 0.1px solid #1b1e23;
   border-radius: 20px;
+  background-color: #0e0e0e;
 
   font-family: Arial, Helvetica, sans-serif;
   font-size: 15px;
   color: white;
-  font-weight: bold;
   text-align: center;
 
   padding: 20px;
+  max-height: 500px;
 }
 
+
 @media (max-width: 768px) {
+
   .primeira-linha,
   .segunda-linha {
-    flex-direction: column; /* Empilha os itens na vertical */
-    align-items: center; /* Centraliza horizontalmente */
+    flex-direction: column;
+    align-items: center;
+
     gap: 30px;
   }
 }
@@ -297,33 +333,35 @@ header {
     border-radius: 15px;
     text-align: center;
   }
-  #id-login{
+
+  #id-login {
     display: none;
   }
 
-  .planos-container{
+  .planos-container {
     display: flex;
     flex-direction: column;
   }
-  
-.info-abaixo-hub {
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-}
-.linha-vertical2{
-  display: none;
-}
 
-.controle1{
-  border: 1px solid #1b1e23;
-  padding: 15px;
-  border-radius: 10px;
-}
+  .info-abaixo-hub {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+  }
 
-.controle2{
-  border: 1px solid #1b1e23;
-  padding: 15px;
-  border-radius: 10px;
-}
+  .linha-vertical2 {
+    display: none;
+  }
+
+  .controle1 {
+    border: 1px solid #1b1e23;
+    padding: 15px;
+    border-radius: 10px;
+  }
+
+  .controle2 {
+    border: 1px solid #1b1e23;
+    padding: 15px;
+    border-radius: 10px;
+  }
 }
