@@ -11,5 +11,7 @@
 [🔗 LINK para prévia do Dashboard!](https://youtu.be/F52lYQiOvwU)
 
 ### 🖼️ Imagens do Projeto:
+![Primeira Parte](./ArbimakerBrasilFotos/arbihome1.png)
+![Segunda Parte](./ArbimakerBrasilFotos/arbihome2.png)
 
 ⚠️ O site está sendo atualizado constantemente conforme o progresso do dashboard.
