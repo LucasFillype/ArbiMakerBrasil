@@ -114,6 +114,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 60px;
 }
 
 .container-info {
@@ -141,6 +142,14 @@ header {
   gap: 20px;
 }
 
+.primeira-linha-direita{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 20px;
+}
+
 #primeira-foto,
 #segunda-foto,
 #terceira-foto {
@@ -156,6 +165,22 @@ header {
   padding: 20px;
   max-height: 500px;
 }
+#video-button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  background-color: red;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  text-decoration: none;
+
+  padding: 10px;
+  gap: 5px;
+  max-width: 250px;
+}
 
 
 @media (max-width: 768px) {
@@ -164,6 +189,7 @@ header {
   .segunda-linha {
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 
     gap: 30px;
   }
